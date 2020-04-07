@@ -1,0 +1,353 @@
+---
+title:  'Beauty in the Ear of the Beholder '
+author: 'Chris Stapleton'
+output: 
+    flexdashboard::flex_dashboard:
+        theme: cerulean
+        vertical_layout: scroll
+        orientation: rows
+---
+
+```{r setup}
+# In order to use these packages, we need to install flexdashboard, plotly, and Cairo.
+library(tidyverse)
+library(plotly)
+library(spotifyr)
+library(Cairo)
+library(gridExtra)
+library(grid)
+library(gtable)
+library(ggplot2)
+library(compmus)
+library(viridis)
+source('spotify.R')
+```
+
+Row
+-------------------------------------
+
+### Introduction
+This is where the introduction comes
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+Row 
+-------------------------------------
+
+
+
+### <b>Expert analysis</b>
+Here we explain that we used 3 experts to asses 30 pieces and selected 15 based on inter-observer reliability
+
+
+### Songs 1-5 
+
+Blueming<br>
+<audio controls>
+  <source src="Blueming.mp3" type="audio/mpeg"> 
+</audio> <br>
+
+
+Bygone Bumps <br>
+<audio controls>
+  <source src="Bygone Bumps.mp3" type="audio/mpeg">
+</audio>  <br>
+
+
+Cia Pat <br>
+<audio controls>
+  <source src="Cia Pat.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Decision (Price of Love)<br>
+<audio controls>
+  <source src="Decision (Price of Love).mp3" type="audio/mpeg"> 
+</audio> <br>
+
+
+Elysium <br>
+<audio controls>
+  <source src="Elysium.mp3" type="audio/mpeg">
+</audio>  <br>
+
+
+### Songs 6-10
+
+Firth Of Fifth <br>
+<audio controls>
+  <source src="Firth Of Fifth.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Less Is Moi <br>
+<audio controls>
+  <source src="Less Is Moi.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Married Life <br>
+<audio controls>
+  <source src="Married Life.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Resolver <br>
+<audio controls>
+  <source src="Resolver.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Scarface Theme <br>
+<audio controls>
+  <source src="ScarFace 'Tony Theme' Giorgio Moroder.mp3" type="audio/mpeg">
+</audio>  <br>
+
+### Songs 11-15
+
+
+
+Single Petal Of A Rose <br>
+<audio controls>
+  <source src="Single Petal Of A Rose.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Song For A New Beginning <br>
+<audio controls>
+  <source src="Song For A New Beginning.mp3" type="audio/mpeg">
+</audio>  <br>
+
+syro u473t8+e <br>
+<audio controls>
+  <source src="syro u473t8+e [141.98] (piezoluminescence mix).mp3" type="audio/mpeg">
+</audio>  <br>
+
+The Kiss <br>
+<audio controls>
+  <source src="The Kiss - The Last Of The Mohicans.mp3" type="audio/mpeg">
+</audio>  <br>
+
+USA III Rail <br>
+<audio controls>
+  <source src="USA III Rail.mp3" type="audio/mpeg">
+</audio>  <br>
+
+
+Row 
+-------------------------------------
+
+### Data description
+Here we describe the selection, what the scales mean and show how everything is distributed. At the end we'll seguie them to the questionnaire row.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+### Histograms 1-4
+```{r, fig.height=10, fig.width=5 }
+Features <- read.csv2("Features.csv")
+Features[,1] <- as.factor(Features[,1])
+
+Temp <- ggplot(Features, aes(x = reorder(Song,Tempo), y = Tempo, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") +
+  ggtitle("Tempo Rating (slow-fast)")
+  
+  
+Arti <- ggplot(Features, aes(x = reorder(Song,Articulation), y = Articulation, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") + 
+  ylab("Rating (1-10)")+
+  ggtitle("Articulation Rating (staccato-legato)")
+  
+Mode <- ggplot(Features, aes(x = reorder(Song,Mode), y = Mode, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") +
+  ggtitle("Mode Rating (minor-major)")
+  
+Inte <- ggplot(Features, aes(x = reorder(Song,Intensity), y = Intensity, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") +
+  ggtitle("Intensity Rating (Pianissimo - Fortissimo)")
+  
+Tonal <- ggplot(Features, aes(x = reorder(Song,Tonalness), y = Tonalness, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") +
+  ggtitle("Tonalness Rating (Atonal - Tonal)")
+  
+Pitch <- ggplot(Features, aes(x = reorder(Song,Pitch), y = Pitch, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") +
+  ggtitle("Pitch Rating (Bass - Treble)")
+  
+Melo <- ggplot(Features, aes(x = reorder(Song,Melody), y = Melody, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") +
+  ggtitle("Melody Rating (Very unmelodious - Very melodius)")
+
+Rhythclar <- ggplot(Features, aes(x = reorder(Song,Rhytmic.Clarity), y = Rhytmic.Clarity, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") + 
+  ggtitle("Rhythmic Clarity (Vague - Firm)")
+  
+Rhythcomp <- ggplot(Features, aes(x = reorder(Song,Rhythmic.Complexity), y = Rhythmic.Complexity, fill = Song)) +
+  geom_col(show.legend = FALSE) +
+  xlab("Song") +
+  ylab("Rating (1-10)") +
+  ggtitle("Rhythmic Complexity  (Simple - Complex)")
+  
+  lay <- rbind(1,
+               2,
+               3,
+               4)
+            
+  grid.arrange(Temp, Arti, Mode, Inte, layout_matrix = lay)
+
+
+```
+
+
+### Histograms 5-9
+
+```{r, fig.height=10, fig.width=5 }
+  lay <- rbind(1,
+               1,
+               2,
+               2,
+               3,
+               3,
+               4,
+               4,
+               5,
+               5)
+  grid.arrange(Tonal, Pitch, Melo, Rhythclar, Rhythcomp, layout_matrix = lay)
+
+```
+
+Row
+-------------------------------------
+
+### Research setup
+Here we will start explaining how the questionnaire works and provide general background information about our participants (age distribution, musical sophistication distribution), we will explain that we will use LCA to divide the participants into groups and their reasses each of the groups characteristics in the analysis part.
+<br>
+<br>
+<br>
+<br>
+<br>
+
+### Chart with gender/age/backhground info
+
+
+
+
+### Chart with Goldsmiths-scores
+
+
+
+Row
+-------------------------------------
+### Analysis
+Here we will show the results of the LCA, with a table and some background information as well (perhaps a chart with the sophistication scores per group)
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+### Chart: Class table
+
+
+### Chart: Sophistication score scatterplot per group or something
+
+
+
+
+Row
+-------------------------------------
+
+### Possible more charts (see if our own music belongs to a specific claas)
+<br>
+<br>
+<br>
+<br>
+<br>
+
+### Possibly more charts
+
+
+### Possibly more charts
+
+Row
+-------------------------------------
+
+
+### Conclusion
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
