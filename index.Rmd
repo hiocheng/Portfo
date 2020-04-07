@@ -27,7 +27,7 @@ Row
 -------------------------------------
 
 ### Introduction
-This is where the introduction comes
+This is where the introduction should come
 <br>
 <br>
 <br>
