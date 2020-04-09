@@ -23,160 +23,64 @@ library(viridis)
 source('spotify.R')
 ```
 
+Research
+====================================
+
 Row
 -------------------------------------
 
-### Introduction
-This is where the introduction should come
-<br>
-<br>
-<br>
-<br>
-<br>
+### <b><font size="3">Assessing the beauty of music</font></b>
+Music is valued by people primarily for its aesthetics, be it because of the emotion it is capable of generating, the memories it triggers, or the beauty it transcends. Nevertheless, this perception of aesthetics is highly subjective. There is no specific reason or explanation to why one would for example prefer jazz over pop music. This realisation has however not stopped scholars and academics from generating theories that objectifies aesthetics. The modernist theory which contends that artistic music is less popularly valued because of its high intellectual demand serves as an example. This theory would explain the above-mentioned example by arguing that jazz music is less popularly valued because of its complex form and is therefore a genre that can be comprehended only by musically sophisticated individuals. With these ongoing debates in the arena, we wanted to test if there is an objective quality to beauty. This led us to our research question: “To what extent does musical sophistication influence the perception of beauty”. 
 
-
+To answer our research question, we will operationalise musical sophistication and beauty by using the Goldsmiths Musical Sophistication Index and Qualtrics to make an online survey.
+We first made a selection of 15 songs that we deemed as most awe-inspiring. We then used the Goldsmiths Musical Sophistication Index to measure musical sophistication and used an online survey to ask participants to assess their experience of beauty. For analysis, we used Latent Class analysis.
 
 
 Row 
 -------------------------------------
 
+### <b><font size="3">Expert analysis</font></b>
+To obtain the musical components of each song we conducted a small survey, in which three musical experts with more than 10 years of formal training assessed 30 musical pieces on 9 musical component scales (Aljanaki, 2016). The experts rated these components from 1 to 10. The components where:
+
+- Tempo: the general pulse of the song, ranging from very slow (1) to very fast (10)
+
+- Articulation: The rhythmic articulation of each song, ranging from very staccato (1) to completely legato (10), staccato are separate notes with rests in between, legato notes are notes that are strung together.
+
+- Mode: overall mode and feel of the songs, ranging from minor (1) to major (10)
+
+- Intensity: overall loudness and crescendos and decrescendos in a song, ranging from 1 (pianissimo) to 10 (fortissimo)
+
+- Tonalness: overall tonalness of the composition, ranging from (1) atonal, with no discernable mode or key to tonal (10) with no use of "outside" extensions and very clear discernable key and mode
+
+- Pitch: overall distribution of the pitches, ranging from all bass (1) to all treble (10)
+
+- Melody: overall presence and dominance of melody, ranging from very unmelodious (1) to very melodious (10)
+
+- Rhythmic Clarity: overall presence of a pulse, ranging from very vague (1) to very firm (10)
+
+- Rhythmic Complexity: the extent to which different meters, odd tempo's or complex rhytmic patterns are utilized, ranging from very simple (1) to very complex (10)
 
 
-### <b>Expert analysis</b>
-Here we explain that we used 3 experts to asses 30 pieces and selected 15 based on inter-observer reliability
+After the results were obtained, we examined how reliable the scores were, by calculating the sum of the differences in ratings between observers over all the components. This yielded a reliability score, which we used to select 15 pieces that are included in the general survey. The distribution of musical components over these 15 songs is visualized on the left. 
 
+...Interpretation...
 
-### Songs 1-5 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-Blueming<br>
-<audio controls>
-  <source src="Blueming.mp3" type="audio/mpeg"> 
-</audio> <br>
-
-
-Bygone Bumps <br>
-<audio controls>
-  <source src="Bygone Bumps.mp3" type="audio/mpeg">
-</audio>  <br>
-
-
-Cia Pat <br>
-<audio controls>
-  <source src="Cia Pat.mp3" type="audio/mpeg">
-</audio>  <br>
-
-Decision (Price of Love)<br>
-<audio controls>
-  <source src="Decision (Price of Love).mp3" type="audio/mpeg"> 
-</audio> <br>
-
-
-Elysium <br>
-<audio controls>
-  <source src="Elysium.mp3" type="audio/mpeg">
-</audio>  <br>
-
-
-### Songs 6-10
-
-Firth Of Fifth <br>
-<audio controls>
-  <source src="Firth Of Fifth.mp3" type="audio/mpeg">
-</audio>  <br>
-
-Less Is Moi <br>
-<audio controls>
-  <source src="Less Is Moi.mp3" type="audio/mpeg">
-</audio>  <br>
-
-Married Life <br>
-<audio controls>
-  <source src="Married Life.mp3" type="audio/mpeg">
-</audio>  <br>
-
-Resolver <br>
-<audio controls>
-  <source src="Resolver.mp3" type="audio/mpeg">
-</audio>  <br>
-
-Scarface Theme <br>
-<audio controls>
-  <source src="ScarFace 'Tony Theme' Giorgio Moroder.mp3" type="audio/mpeg">
-</audio>  <br>
-
-### Songs 11-15
-
-
-
-Single Petal Of A Rose <br>
-<audio controls>
-  <source src="Single Petal Of A Rose.mp3" type="audio/mpeg">
-</audio>  <br>
-
-Song For A New Beginning <br>
-<audio controls>
-  <source src="Song For A New Beginning.mp3" type="audio/mpeg">
-</audio>  <br>
-
-syro u473t8+e <br>
-<audio controls>
-  <source src="syro u473t8+e [141.98] (piezoluminescence mix).mp3" type="audio/mpeg">
-</audio>  <br>
-
-The Kiss <br>
-<audio controls>
-  <source src="The Kiss - The Last Of The Mohicans.mp3" type="audio/mpeg">
-</audio>  <br>
-
-USA III Rail <br>
-<audio controls>
-  <source src="USA III Rail.mp3" type="audio/mpeg">
-</audio>  <br>
-
-
-Row 
--------------------------------------
-
-### Data description
-Here we describe the selection, what the scales mean and show how everything is distributed. At the end we'll seguie them to the questionnaire row.
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 
 ### Histograms 1-4
@@ -270,7 +174,7 @@ Rhythcomp <- ggplot(Features, aes(x = reorder(Song,Rhythmic.Complexity), y = Rhy
 Row
 -------------------------------------
 
-### Research setup
+### <b><font size="3">Research setup</font></b>
 Here we will start explaining how the questionnaire works and provide general background information about our participants (age distribution, musical sophistication distribution), we will explain that we will use LCA to divide the participants into groups and their reasses each of the groups characteristics in the analysis part.
 <br>
 <br>
@@ -289,7 +193,7 @@ Here we will start explaining how the questionnaire works and provide general ba
 
 Row
 -------------------------------------
-### Analysis
+### <b><font size="3">Analysis</font></b>
 Here we will show the results of the LCA, with a table and some background information as well (perhaps a chart with the sophistication scores per group)
 <br>
 <br>
@@ -326,7 +230,7 @@ Row
 -------------------------------------
 
 
-### Conclusion
+### <b><font size="3">Conclusion</font></b>
 <br>
 <br>
 <br>
@@ -338,16 +242,114 @@ Row
 <br>
 
 
+Songs
+====================================
+
+Row
+-------------------------------------
+
+### Songs 1-5 
+
+Blueming<br>
+<audio controls>
+  <source src="Blueming.mp3" type="audio/mpeg"> 
+</audio> <br>
+
+
+Bygone Bumps <br>
+<audio controls>
+  <source src="Bygone Bumps.mp3" type="audio/mpeg">
+</audio>  <br>
+
+
+Cia Pat <br>
+<audio controls>
+  <source src="Cia Pat.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Decision (Price of Love)<br>
+<audio controls>
+  <source src="Decision (Price of Love).mp3" type="audio/mpeg"> 
+</audio> <br>
+
+
+Elysium <br>
+<audio controls>
+  <source src="Elysium.mp3" type="audio/mpeg">
+</audio>  <br>
+
+
+### Songs 6-10
+
+Firth Of Fifth <br>
+<audio controls>
+  <source src="Firth Of Fifth.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Less Is Moi <br>
+<audio controls>
+  <source src="Less Is Moi.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Married Life <br>
+<audio controls>
+  <source src="Married Life.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Resolver <br>
+<audio controls>
+  <source src="Resolver.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Scarface Theme <br>
+<audio controls>
+  <source src="ScarFace 'Tony Theme' Giorgio Moroder.mp3" type="audio/mpeg">
+</audio>  <br>
+
+### Songs 11-15
 
 
 
+Single Petal Of A Rose <br>
+<audio controls>
+  <source src="Single Petal Of A Rose.mp3" type="audio/mpeg">
+</audio>  <br>
+
+Song For A New Beginning <br>
+<audio controls>
+  <source src="Song For A New Beginning.mp3" type="audio/mpeg">
+</audio>  <br>
+
+syro u473t8+e <br>
+<audio controls>
+  <source src="syro u473t8+e [141.98] (piezoluminescence mix).mp3" type="audio/mpeg">
+</audio>  <br>
+
+Šešių Natų Drama _ Drama In Six Notes <br>
+<audio controls>
+  <source src="Šešių Natų Drama _ Drama In Six Notes.mp3" type="audio/mpeg">
+</audio>  <br>
+
+USA III Rail <br>
+<audio controls>
+  <source src="USA III Rail.mp3" type="audio/mpeg">
+</audio>  <br>
 
 
 
+Survey hyperlink
+====================================
 
+Row
+-------------------------------------
 
+### Questionnaires:
 
+Sophistication and Beauty Assessment:
+https://uvacommscience.eu.qualtrics.com/jfe/form/SV_cBVeNrdFPnEtoLH
 
+References
+====================================
 
 
 
