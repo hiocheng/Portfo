@@ -3,7 +3,7 @@ title:  'Beauty in the Ear of the Beholder '
 author: 'Chris Stapleton'
 output: 
     flexdashboard::flex_dashboard:
-        theme: cerulean
+        css: mytheme.css
         vertical_layout: scroll
         orientation: rows
 ---
@@ -21,6 +21,7 @@ library(ggplot2)
 library(compmus)
 library(viridis)
 source('spotify.R')
+
 ```
 
 Research
@@ -248,7 +249,7 @@ Songs
 Row
 -------------------------------------
 
-### Songs 1-5 
+### Songs 
 
 Blueming<br>
 <audio controls>
@@ -279,7 +280,6 @@ Elysium <br>
 </audio>  <br>
 
 
-### Songs 6-10
 
 Firth Of Fifth <br>
 <audio controls>
@@ -305,9 +305,6 @@ Scarface Theme <br>
 <audio controls>
   <source src="ScarFace 'Tony Theme' Giorgio Moroder.mp3" type="audio/mpeg">
 </audio>  <br>
-
-### Songs 11-15
-
 
 
 Single Petal Of A Rose <br>
