@@ -1,6 +1,5 @@
 ---
 title:  'Beauty in the Ear of the Beholder '
-author: 'Chris Stapleton'
 output: 
     flexdashboard::flex_dashboard:
         css: mytheme.css
@@ -20,17 +19,18 @@ library(gtable)
 library(ggplot2)
 library(compmus)
 library(viridis)
+library(DT)
 source('spotify.R')
 
 ```
 
-Research
+Intro
 ====================================
 
 Row
 -------------------------------------
 
-### <b><font size="3">Assessing the beauty of music</font></b>
+### Assessing the beauty of music
 Music is valued by people primarily for its aesthetics, be it because of the emotion it is capable of generating, the memories it triggers, or the beauty it transcends. Nevertheless, this perception of aesthetics is highly subjective. There is no specific reason or explanation to why one would for example prefer jazz over pop music. This realisation has however not stopped scholars and academics from generating theories that objectifies aesthetics. The modernist theory which contends that artistic music is less popularly valued because of its high intellectual demand serves as an example. This theory would explain the above-mentioned example by arguing that jazz music is less popularly valued because of its complex form and is therefore a genre that can be comprehended only by musically sophisticated individuals. With these ongoing debates in the arena, we wanted to test if there is an objective quality to beauty. This led us to our research question: “To what extent does musical sophistication influence the perception of beauty”. 
 
 To answer our research question, we will operationalise musical sophistication and beauty by using the Goldsmiths Musical Sophistication Index and Qualtrics to make an online survey.
@@ -40,8 +40,28 @@ We first made a selection of 15 songs that we deemed as most awe-inspiring. We t
 Row 
 -------------------------------------
 
-### <b><font size="3">Expert analysis</font></b>
-To obtain the musical components of each song we conducted a small survey, in which three musical experts with more than 10 years of formal training assessed 30 musical pieces on 9 musical component scales (Aljanaki, 2016). The experts rated these components from 1 to 10. The components where:
+
+### Some other text explaining the structure of the site
+
+
+
+
+
+### Contact information and Names
+
+
+
+
+Expert Analysis
+=========================================
+ 
+
+
+
+Column
+-------------------------------------
+### Rating the Songs
+When starting out our survey, we searched online for known datasets that included musical pieces that were dissected on their musical components. This was important as we wanted to compare musical sophistication with musical pieces and we needed information about the structure of these pieces. Since this yielded no results, we decided to each supply 5 instrumental songs to a playlist on Spotify. These songs needed to be instrumental to control for the influence of language on the perception of beauty. After we compiled 30 songs, we then used 3 musical experts with more than 10 years of formal training to rate them on 9 components on a 10-point Likert-scale, copying the method used in the article of Aljanaki et al. (<a href="https://www.researchgate.net/publication/267326664_COMPUTATIONAL_MODELING_OF_INDUCED_EMOTION_USING_GEMS">2016</a>). The following components were:
 
 - Tempo: the general pulse of the song, ranging from very slow (1) to very fast (10)
 
@@ -61,195 +81,109 @@ To obtain the musical components of each song we conducted a small survey, in wh
 
 - Rhythmic Complexity: the extent to which different meters, odd tempo's or complex rhytmic patterns are utilized, ranging from very simple (1) to very complex (10)
 
+You can see the distribution of the scores over 30 songs in the boxplot on the right.
 
-After the results were obtained, we examined how reliable the scores were, by calculating the sum of the differences in ratings between observers over all the components. This yielded a reliability score, which we used to select 15 pieces that are included in the general survey. The distribution of musical components over these 15 songs is visualized on the left. 
+Looking at the distribution, it becomes apparent that the components Articulation, Mode and Rhythmic Clarity are pretty well distributed, judging by the interquartile range (these are the coloured bodies representing the 25th and 75th percentile range of the assigned values), but nearly all components seem to cover a broad spectrum. Exceptions are the components Pitch and Melody, with Pitch mostly being rated between 4 and 8, indicating a slight preference for more treble within our selection and melody ranges between 5 and 9, indicating a slight preferences for pieces with a clear melody. Both have outliers in the lower ranges  however, which could be used for the eventual selection as well to cover as much of the spectrum as possible.
 
-...Interpretation...
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+After rating all 30 songs, we wanted to select 15 songs for our final survey. These songs had to be reliable in expert rating and cover most of the range of the 9 components.
 
 
+### Boxplot of the components of all 30 songs
 
-### Histograms 1-4
-```{r, fig.height=10, fig.width=5 }
-Features <- read.csv2("Features.csv")
-Features[,1] <- as.factor(Features[,1])
+```{r}
+Features30 <- read.csv2("Features30.csv")
+Features_wide <- Features30 %>%
+  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
 
-Temp <- ggplot(Features, aes(x = reorder(Song,Tempo), y = Tempo, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") +
-  ggtitle("Tempo Rating (slow-fast)")
-  
-  
-Arti <- ggplot(Features, aes(x = reorder(Song,Articulation), y = Articulation, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") + 
-  ylab("Rating (1-10)")+
-  ggtitle("Articulation Rating (staccato-legato)")
-  
-Mode <- ggplot(Features, aes(x = reorder(Song,Mode), y = Mode, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") +
-  ggtitle("Mode Rating (minor-major)")
-  
-Inte <- ggplot(Features, aes(x = reorder(Song,Intensity), y = Intensity, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") +
-  ggtitle("Intensity Rating (Pianissimo - Fortissimo)")
-  
-Tonal <- ggplot(Features, aes(x = reorder(Song,Tonalness), y = Tonalness, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") +
-  ggtitle("Tonalness Rating (Atonal - Tonal)")
-  
-Pitch <- ggplot(Features, aes(x = reorder(Song,Pitch), y = Pitch, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") +
-  ggtitle("Pitch Rating (Bass - Treble)")
-  
-Melo <- ggplot(Features, aes(x = reorder(Song,Melody), y = Melody, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") +
-  ggtitle("Melody Rating (Very unmelodious - Very melodius)")
+ggplot(Features_wide, aes(x = Feature, y = Parameter, fill = Feature)) +
+  geom_boxplot(show.legend = FALSE, alpha = 0.75) +
+    theme(text = element_text(),
+        axis.text.x = element_text(size=7, angle = 45, hjust = 1))
+   
 
-Rhythclar <- ggplot(Features, aes(x = reorder(Song,Rhytmic.Clarity), y = Rhytmic.Clarity, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") + 
-  ggtitle("Rhythmic Clarity (Vague - Firm)")
-  
-Rhythcomp <- ggplot(Features, aes(x = reorder(Song,Rhythmic.Complexity), y = Rhythmic.Complexity, fill = Song)) +
-  geom_col(show.legend = FALSE) +
-  xlab("Song") +
-  ylab("Rating (1-10)") +
-  ggtitle("Rhythmic Complexity  (Simple - Complex)")
-  
-  lay <- rbind(1,
-               2,
-               3,
-               4)
-            
-  grid.arrange(Temp, Arti, Mode, Inte, layout_matrix = lay)
+```
+
+Column
+-------------------------------------
+
+### Assessing reliability
+To start our selection of 15 songs, we first estimated the reliability of the expert ratings per song. To do this we computed distance scores between each of the 3 experts. For example, each rater provided a rating of the component Tempo for a given song. The first rater gave it a 5, the second rater gave it a 6 and the third a 7. The distance could then be calculated by taking the distance between the first and the second rater (6 - 5 = 1), the distance between the second and the third rater (7 - 6 = 1) and the distance between the first and the third rater (7 - 5 = 2). We then summed the difference (1 + 1 + 2 = 4), which provided an estimate of rater consensus on the component tempo.
+
+Subsequently, this was done for all components per song, and then all the reliability scores per component were summed to give an estimate of overall reliability. The table on the right shows these scores for all 30 songs.
+
+As can be seen from the table, the reliability scores range between 26 and 64, with a lower score representing better consensus on that song. Based on these scores, we estimated a cut-off point for song selection (reliability score < 45), and used this to select our songs. Upon examining our prior selection however, it became apparent that the distribution of tempo ratings was skewed to favour higher tempos and not enough atonal songs (low score on tonalness). To correct for this we decided to swap the song Sesiu Nata Drama (reliability score of 46) of the song The Kiss (reliability score of 42), to make sure our songs represented most of the component ranges. In the next segment we will examine this further.
+
+
+
+### Reliability scores per song
+```{r}
+Rela <- read.csv("Reliability.csv", sep=";")
+
+datatable(Rela,
+  rownames = FALSE, options = list(pageLength = 15)
+)
+```
+
+
+Column
+-------------------------------------
+
+### Re-examing the components of our song selection
+To re-examine our selection of songs, we've now used a jitterplot instead of a boxplot, since 15 songs are not enough to compute proper boxplots. By using jittering, we can make sure that the points do not overlap per feature, but instead jitter slightly to the left and right of the vertical line that can be drawn from the x-axis per component. 
+
+Examing the jitterplot, it becomes apparent that our selection covers quite a large range for most components, with a range of around 6 for most components. Certain interest should be given towards the component of Pitch, which features mostly average Bass/Treble compositions, with 1 lower range song.
+
+Overall this looks to be an okay distribution of songs, given that the playlist was compiled by 6 different people with different preferences. For some components however, a more extreme rating would be preferred so we would've had more room to examine the eventual class differences. 
+
+
+
+
+
+
+
+### The jitterplot shows our song selection more clearly
+```{r}
+Features15 <- read.csv("Features_goed.csv", sep=";")
+
+Features15_wide <- Features15 %>%
+  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
+
+
+jitter <- ggplot(Features15_wide, aes(x = Feature, y = Parameter, col = Feature, label = Song)) +
+  geom_jitter(width = 0.25, alpha = 0.5) +
+    theme(axis.text.x = element_text(size=7, angle = 45, hjust = 1)) +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(0,10, by = 1))
+
+ggplotly(jitter)
+
 
 
 ```
 
 
-### Histograms 5-9
+Column
+-------------------------------------
 
-```{r, fig.height=10, fig.width=5 }
-  lay <- rbind(1,
-               1,
-               2,
-               2,
-               3,
-               3,
-               4,
-               4,
-               5,
-               5)
-  grid.arrange(Tonal, Pitch, Melo, Rhythclar, Rhythcomp, layout_matrix = lay)
+### Concluding the expert analysis
+So far, the distribution of song components looks good, and we've done the best we can to select the most reliable songs for our survey. What remains now is to get to construct our questionnaire and sample our participants. To finish things off, we've included all our selected songs in full for you to listen to and assess whether our selection comprises the entire range yourself. Do you agree with our selection? The final selected snippets for the questionnaire are in the tab Song Snippets.
 
-```
+
+
+### Our selected songs
+<br>
+<iframe src="https://open.spotify.com/embed/playlist/10OqKYDJG7e4fEBZDCzcvw" width="300" height="800" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+
+
+
+
+Song Snippets
+========================================
 
 Row
 -------------------------------------
 
-### <b><font size="3">Research setup</font></b>
-Here we will start explaining how the questionnaire works and provide general background information about our participants (age distribution, musical sophistication distribution), we will explain that we will use LCA to divide the participants into groups and their reasses each of the groups characteristics in the analysis part.
-<br>
-<br>
-<br>
-<br>
-<br>
-
-### Chart with gender/age/backhground info
-
-
-
-
-### Chart with Goldsmiths-scores
-
-
-
-Row
--------------------------------------
-### <b><font size="3">Analysis</font></b>
-Here we will show the results of the LCA, with a table and some background information as well (perhaps a chart with the sophistication scores per group)
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-### Chart: Class table
-
-
-### Chart: Sophistication score scatterplot per group or something
-
-
-
-
-Row
--------------------------------------
-
-### Possible more charts (see if our own music belongs to a specific claas)
-<br>
-<br>
-<br>
-<br>
-<br>
-
-### Possibly more charts
-
-
-### Possibly more charts
-
-Row
--------------------------------------
-
-
-### <b><font size="3">Conclusion</font></b>
-<br>
-<br>
-<br>
-<br>
-<br><br>
-<br>
-<br>
-<br>
-<br>
-
-
-Songs
-====================================
-
-Row
--------------------------------------
-
-### Songs 
+###  Songs 
 
 Blueming<br>
 <audio controls>
@@ -334,19 +268,8 @@ USA III Rail <br>
 
 
 
-Survey hyperlink
-====================================
 
-Row
--------------------------------------
 
-### Questionnaires:
-
-Sophistication and Beauty Assessment:
-https://uvacommscience.eu.qualtrics.com/jfe/form/SV_cBVeNrdFPnEtoLH
-
-References
-====================================
 
 
 

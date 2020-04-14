@@ -27,11 +27,39 @@ body {
     flex-direction: row;
 }
 
+.chart-title {
+    border-bottom: 1px solid #9ccdff;
+    color: #040404;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 7px 10px 4px;
+}
+
+.chart-wrapper, .nav-tabs-custom, .sbframe-commentary {
+    background: #fff;
+    border: 1px solid #2780e3;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+}
+
+div#re-examing-the-components-of-our-song-selection{
+  height: fit-content;
+}
+
+div#the-jitterplot-shows-our-song-selection-more-clearly {
+    height: 700px;
+}
+
 div#row {
     margin-right: 50%;
 }
 
 
-div#row-6 {
+div#songs {
     margin-right: 70%;
+}
+
+div#concluding-the-expert-analysis {
+    height: fit-content;
 }
