@@ -173,7 +173,56 @@ So far, the distribution of song components looks good, and we've done the best 
 <br>
 <iframe src="https://open.spotify.com/embed/playlist/10OqKYDJG7e4fEBZDCzcvw" width="300" height="800" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
+Main research
+========================================
 
+
+Column
+-------------------------------------
+
+
+### Intro page about 
+How we sampled people, general construction and explanation of Gold-MSI and our genre/gender questions and announing setup of our research
+
+
+### Some graphs with general info about gender, sophistication scores and genre preferences
+<i>Under construction</i>
+
+
+Column
+-------------------------------------
+
+
+### Analysis and results part
+Short xplanation of LCA, with then our findings
+
+
+### Chart tables of lca
+<i>Under construction</i>
+
+Column
+-------------------------------------
+
+
+### More analysis
+Class characteristics, plotting of Gold-MSI scores per class, maybe gender differences between classes, is a bit dependant on what we can find
+
+
+### Charts of class charateristics
+<i>Under construction</i>
+
+
+
+
+Column
+-------------------------------------
+
+
+### Conclusion
+<i>Under construction</i>
+
+### Discussion
+<i>Under construction</i>
 
 
 
