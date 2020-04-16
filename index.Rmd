@@ -20,12 +20,14 @@ library(ggplot2)
 library(compmus)
 library(viridis)
 library(DT)
+library(ggiraph)
 source('spotify.R')
 
 ```
 
 Intro
 ====================================
+
 
 Row
 -------------------------------------
@@ -63,128 +65,6 @@ Willem Pleiter, Kristina Savickaja, Xiaoqing Li, Denise Quek, Nikita van ‘t Ro
 For further information, please contact us at estherliefting@student.uva.nl
 
 
-
-
-Expert Analysis
-=========================================
- 
-
-
-
-Column
--------------------------------------
-### Rating the Songs
-When starting out our survey, we searched online for known datasets that included musical pieces that were dissected on their musical components. This was important as we wanted to compare musical sophistication with musical pieces and we needed information about the structure of these pieces. Since this yielded no results, we decided to each supply 5 instrumental songs to a playlist on Spotify. These songs needed to be instrumental to control for the influence of language on the perception of beauty. After we compiled 30 songs, we then used 3 musical experts with more than 10 years of formal training to rate them on 9 components on a 10-point Likert-scale, copying the method used in the article of Aljanaki et al. (<a href="https://www.researchgate.net/publication/267326664_COMPUTATIONAL_MODELING_OF_INDUCED_EMOTION_USING_GEMS">2016</a>). The following components were:
-
-- Tempo: the general pulse of the song, ranging from very slow (1) to very fast (10)
-
-- Articulation: The rhythmic articulation of each song, ranging from very staccato (1) to completely legato (10), staccato are separate notes with rests in between, legato notes are notes that are strung together.
-
-- Mode: overall mode and feel of the songs, ranging from minor (1) to major (10)
-
-- Intensity: overall loudness and crescendos and decrescendos in a song, ranging from 1 (pianissimo) to 10 (fortissimo)
-
-- Tonalness: overall tonalness of the composition, ranging from (1) atonal, with no discernable mode or key to tonal (10) with no use of "outside" extensions and very clear discernable key and mode
-
-- Pitch: overall distribution of the pitches, ranging from all bass (1) to all treble (10)
-
-- Melody: overall presence and dominance of melody, ranging from very unmelodious (1) to very melodious (10)
-
-- Rhythmic Clarity: overall presence of a pulse, ranging from very vague (1) to very firm (10)
-
-- Rhythmic Complexity: the extent to which different meters, odd tempo's or complex rhytmic patterns are utilized, ranging from very simple (1) to very complex (10)
-
-You can see the distribution of the scores over 30 songs in the boxplot on the right.
-
-Looking at the distribution, it becomes apparent that the components Articulation, Mode and Rhythmic Clarity are pretty well distributed, judging by the interquartile range (these are the coloured bodies representing the 25th and 75th percentile range of the assigned values), but nearly all components seem to cover a broad spectrum. Exceptions are the components Pitch and Melody, with Pitch mostly being rated between 4 and 8, indicating a slight preference for more treble within our selection and melody ranges between 5 and 9, indicating a slight preferences for pieces with a clear melody. Both have outliers in the lower ranges  however, which could be used for the eventual selection as well to cover as much of the spectrum as possible.
-
-After rating all 30 songs, we wanted to select 15 songs for our final survey. These songs had to be reliable in expert rating and cover most of the range of the 9 components.
-
-
-### Boxplot of the components of all 30 songs
-
-```{r}
-Features30 <- read.csv2("Features30.csv")
-Features_wide <- Features30 %>%
-  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
-
-ggplot(Features_wide, aes(x = Feature, y = Parameter, fill = Feature)) +
-  geom_boxplot(show.legend = FALSE, alpha = 0.75) +
-    theme(text = element_text(),
-        axis.text.x = element_text(size=7, angle = 45, hjust = 1))
-   
-
-```
-
-Column
--------------------------------------
-
-### Assessing reliability
-To start our selection of 15 songs, we first estimated the reliability of the expert ratings per song. To do this we computed distance scores between each of the 3 experts. For example, each rater provided a rating of the component Tempo for a given song. The first rater gave it a 5, the second rater gave it a 6 and the third a 7. The distance could then be calculated by taking the distance between the first and the second rater (6 - 5 = 1), the distance between the second and the third rater (7 - 6 = 1) and the distance between the first and the third rater (7 - 5 = 2). We then summed the difference (1 + 1 + 2 = 4), which provided an estimate of rater consensus on the component tempo.
-
-Subsequently, this was done for all components per song, and then all the reliability scores per component were summed to give an estimate of overall reliability. The table on the right shows these scores for all 30 songs.
-
-As can be seen from the table, the reliability scores range between 26 and 64, with a lower score representing better consensus on that song. Based on these scores, we estimated a cut-off point for song selection (reliability score < 45), and used this to select our songs. Upon examining our prior selection however, it became apparent that the distribution of tempo ratings was skewed to favour higher tempos and not enough atonal songs (low score on tonalness). To correct for this we decided to swap the song Sesiu Nata Drama (reliability score of 46) of the song The Kiss (reliability score of 42), to make sure our songs represented most of the component ranges. In the next segment we will examine this further.
-
-
-
-### Reliability scores per song
-```{r}
-Rela <- read.csv("Reliability.csv", sep=";")
-
-datatable(Rela,
-  rownames = FALSE, options = list(pageLength = 15)
-)
-```
-
-
-Column
--------------------------------------
-
-### Re-examing the components of our song selection
-To re-examine our selection of songs, we've now used a jitterplot instead of a boxplot, since 15 songs are not enough to compute proper boxplots. By using jittering, we can make sure that the points do not overlap per feature, but instead jitter slightly to the left and right of the vertical line that can be drawn from the x-axis per component. 
-
-Examing the jitterplot, it becomes apparent that our selection covers quite a large range for most components, with a range of around 6 for most components. Certain interest should be given towards the component of Pitch, which features mostly average Bass/Treble compositions, with 1 lower range song.
-
-Overall this looks to be an okay distribution of songs, given that the playlist was compiled by 6 different people with different preferences. For some components however, a more extreme rating would be preferred so we would've had more room to examine the eventual class differences. 
-
-
-
-
-
-
-
-### The jitterplot shows our song selection more clearly
-```{r}
-Features15 <- read.csv("Features_goed.csv", sep=";")
-
-Features15_wide <- Features15 %>%
-  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
-
-
-jitter <- ggplot(Features15_wide, aes(x = Feature, y = Parameter, col = Feature, label = Song)) +
-  geom_jitter(width = 0.25, alpha = 0.5) +
-    theme(axis.text.x = element_text(size=7, angle = 45, hjust = 1)) +
-  scale_y_continuous(limits = c(0, 10), breaks = seq(0,10, by = 1))
-
-ggplotly(jitter)
-
-
-
-```
-
-
-Column
--------------------------------------
-
-### Concluding the expert analysis
-So far, the distribution of song components looks good, and we've done the best we can to select the most reliable songs for our survey. What remains now is to get to construct our questionnaire and sample our participants. To finish things off, we've included all our selected songs in full for you to listen to and assess whether our selection comprises the entire range yourself. Do you agree with our selection? The final selected snippets for the questionnaire are in the tab Song Snippets.
-
-
-
-### Our selected songs
-<br>
-<iframe src="https://open.spotify.com/embed/playlist/10OqKYDJG7e4fEBZDCzcvw" width="300" height="800" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
 Main research
 ========================================
@@ -239,13 +119,133 @@ Column
 
 
 
-Song Snippets
+Expert Analysis
+=========================================
+ 
+
+Column
+-------------------------------------
+### Rating the Songs
+When starting out our survey, we searched online for known datasets that included musical pieces that were dissected on their musical components. This was important as we wanted to compare musical sophistication with musical pieces and we needed information about the structure of these pieces. Since this yielded no results, we decided to each supply 5 instrumental songs to a playlist on Spotify. These songs needed to be instrumental to control for the influence of language on the perception of beauty. After we compiled 30 songs, we then used 3 musical experts with more than 10 years of formal training to rate them on 9 components on a 10-point Likert-scale, copying the method used in the article of Aljanaki et al. (<a href="https://www.researchgate.net/publication/267326664_COMPUTATIONAL_MODELING_OF_INDUCED_EMOTION_USING_GEMS">2016</a>). The following components were:
+
+- Tempo: the general pulse of the song, ranging from very slow (1) to very fast (10)
+
+- Articulation: The rhythmic articulation of each song, ranging from very staccato (1) to completely legato (10), staccato are separate notes with rests in between, legato notes are notes that are strung together.
+
+- Mode: overall mode and feel of the songs, ranging from minor (1) to major (10)
+
+- Intensity: overall loudness and crescendos and decrescendos in a song, ranging from 1 (pianissimo) to 10 (fortissimo)
+
+- Tonalness: overall tonalness of the composition, ranging from (1) atonal, with no discernable mode or key to tonal (10) with no use of "outside" extensions and very clear discernable key and mode
+
+- Pitch: overall distribution of the pitches, ranging from all bass (1) to all treble (10)
+
+- Melody: overall presence and dominance of melody, ranging from very unmelodious (1) to very melodious (10)
+
+- Rhythmic Clarity: overall presence of a pulse, ranging from very vague (1) to very firm (10)
+
+- Rhythmic Complexity: the extent to which different meters, odd tempo's or complex rhytmic patterns are utilized, ranging from very simple (1) to very complex (10)
+
+
+After all songs were rated, we selected 15 songs to include on our survey based on A) Feature Representability and B) Reliability
+
+***
+<b>A) Feature Representability </b><br>
+<i>The panel on the right is interactive, hover over a point with your mouse to find out more </i>
+
+The combined box and jitterplot shows the overall distribution of the characteristics of the selected songs. The boxplot represents the feature values of all 30 songs. The jitterplot shows the feature values of the 15 songs we selected for our survey. 
+
+Examining the jitterplot, it becomes apparent that our selection covers quite a large range for most components, with a range of around 6 for most components. Certain interest should be given towards the component of Pitch, which features mostly average Bass/Treble compositions, with 1 lower range song. 
+
+Overall this looks to be an okay distribution of songs, given that the playlist was compiled by 6 different people with different preferences. For some components however, a more extreme rating would be preferred so we would've had more room to examine the eventual class differences.
+
+
+
+
+### Box and jitterplot of average expert rating per song
+
+```{r figure.height=20}
+
+#getting features for all songs
+Features30 <- read.csv2("Features30.csv")
+Features_wide <- Features30 %>%
+  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
+
+
+#getting features for selection
+Features15 <- read.csv("Features_goed.csv", sep=";")
+
+Features15_wide <- Features15 %>%
+  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
+
+df <- Features15_wide
+
+df$tooltip <- c(paste0("Song = ", df$Song, "\n Feature = ", df$Feature, "\n Parameter = ", df$Parameter))
+
+Features_wide$Cols <- Features_wide$Feature
+
+Features15_wide$Cols <- Features15_wide$Feature
+
+
+tooltip_css <- "background-color:#9ccdff;opacity:0.2;font-size:15px;border-radius:10px;padding:10px;font-family:'Roboto','Helvetica Neue',Helvetica,Arial,sans-serif;color: #040404"
+
+Box_jitter <- ggplot(Features_wide, aes(x = Feature, y = Parameter, col = Cols, label = Song)) +
+  geom_boxplot(show.legend = FALSE, alpha = 0.4, outlier.shape = NA) +
+    theme(text = element_text(),
+        axis.text.x = element_text(size=7, angle = 45, hjust = 1)) +
+    geom_jitter_interactive(data = Features15_wide, width = 0.25, alpha = 0.7, aes(colour = Cols, tooltip= df$tooltip, data_id = Song), show.legend = FALSE) +
+    theme(axis.text.x = element_text(size=7, angle = 45, hjust = 1)) +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(0,10, by = 1)) +
+  scale_x_discrete(labels = labs)  +
+  theme(legend.position='none')
+
+
+ggiraph(ggobj = Box_jitter, hover_css = "stroke:darkgrey;r:3pt;fill-opacity:1", tooltip_extra_css = tooltip_css)
+
+
+
+
+#ggplotly(p = Box_jitter, width = NULL, height = NULL, tooltip = c("Song", "Parameter", "Feature"), dynamicTicks = FALSE, layerData = 1, originalData = TRUE, source = "A")
+
+
+
+
+
+
+```
+
+Column
+-------------------------------------
+
+### Assessing reliability
+To start our selection of 15 songs, we first estimated the reliability of the expert ratings per song. To do this we computed distance scores between each of the 3 experts. For example, each rater provided a rating of the component Tempo for a given song. The first rater gave it a 5, the second rater gave it a 6 and the third a 7. The distance could then be calculated by taking the distance between the first and the second rater (6 - 5 = 1), the distance between the second and the third rater (7 - 6 = 1) and the distance between the first and the third rater (7 - 5 = 2). We then summed the difference (1 + 1 + 2 = 4), which provided an estimate of rater consensus on the component tempo.
+
+Subsequently, this was done for all components per song, and then all the reliability scores per component were summed to give an estimate of overall reliability. The table on the right shows these scores for all 30 songs.
+
+As can be seen from the table, the reliability scores range between 26 and 64, with a lower score representing better consensus on that song. Based on these scores, we estimated a cut-off point for song selection (reliability score < 45), and used this to select our songs. Upon examining our prior selection however, it became apparent that the distribution of tempo ratings was skewed to favour higher tempos and not enough atonal songs (low score on tonalness). To correct for this we decided to swap the song Sesiu Nata Drama (reliability score of 46) of the song The Kiss (reliability score of 42), to make sure our songs represented most of the component ranges. In the next segment we will examine this further.
+
+
+
+### Reliability scores per song
+```{r}
+Rela <- read.csv("Reliability.csv", sep=";")
+
+datatable(Rela,
+  rownames = FALSE, options = list(pageLength = 10)
+)
+```
+
+
+
+
+
+Songs
 ========================================
 
 Row
 -------------------------------------
 
-###  Songs 
+###  Snippets 
 
 Blueming<br>
 <audio controls>
@@ -328,7 +328,9 @@ USA III Rail <br>
   <source src="USA III Rail.mp3" type="audio/mpeg">
 </audio>  <br>
 
+### Full songs
 
+<iframe src="https://open.spotify.com/embed/playlist/10OqKYDJG7e4fEBZDCzcvw" width="300" height="800" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
 
 
