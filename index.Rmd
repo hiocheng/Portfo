@@ -6,7 +6,6 @@ output:
         vertical_layout: scroll
         orientation: rows
 ---
-
 ```{r setup}
 # In order to use these packages, we need to install flexdashboard, plotly, and Cairo.
 library(tidyverse)
@@ -20,7 +19,8 @@ library(ggplot2)
 library(compmus)
 library(viridis)
 library(DT)
-library(ggiraph)
+library(flexdashboard)
+library (DiagrammeR)
 source('spotify.R')
 
 ```
@@ -28,41 +28,62 @@ source('spotify.R')
 Intro
 ====================================
 
+Inputs {.sidebar}
+-------------------------------------
+### **Assessing the beauty of music**
+  Music is valued by people for many various reasons, be it the emotion it generates, the memories it triggers, or the beauty it transcends. Nevertheless, this perception of aesthetics is highly subjective. There is no specific reason or explanation to why one would prefer jazz over pop music. However, this realisation has not stopped scholars and academics from generating theories that objectify aesthetics. 
+  
+  The modernist view of music aesthetics (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096663/">Huang et al., 2016</a>) supports the idea of genre hierarchy. This theory states that complex music, such as jazz, is less popularly valued because of its high intellectual demand. Followers of the theory would explain the above-mentioned example by arguing that jazz is a genre that can be comprehended and appreciated only by musically sophisticated individuals.
+  
+  Furthermore, jazz might be not as popular as pop, for instance, because popularity requires accessibility. With these ongoing debates in the arena, we wanted to test if there is an objective quality to beauty. This led us to our research question: **“To what extent does musical sophistication influence the perception of beauty?” **
 
-Row
+
+Column
+-------------------------------------
+### Selected songs
+```{r}
+valueBox (15, icon ="ion-music-note", color = "primary")
+```
+
+### Expert analyses
+```{r}
+valueBox (3, icon ="ion-ios-people", color = "info")
+```
+
+### Different regions
+```{r}
+valueBox (26, icon ="ion-location", color = "success")
+```
+
+### LCA classes
+```{r}
+valueBox (3, icon ="ion-levels",color = "#008080")
+```
+
+
+Column
 -------------------------------------
 
-### Assessing the beauty of music
-Music is valued by people for many various reasons, be it the emotion it generates, the memories it triggers, or the beauty it transcends. Nevertheless, this perception of aesthetics is highly subjective. There is no specific reason or explanation to why one would prefer jazz over pop music. However, this realisation has not stopped scholars and academics from generating theories that objectify aesthetics. The modernist view (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096663/">Huang et al., 2016</a>) supports the idea of genre hierarchy. This theory states that complex music, such as jazz, is less popularly valued because of its high intellectual demand. Followers of the theory would explain the above-mentioned example by arguing that jazz is a genre that can be comprehended and appreciated only by musically sophisticated individuals. Furthermore, jazz might be not as popular as pop, for instance, because popularity requires accessibility. With these ongoing debates in the arena, we wanted to test if there is an objective quality to beauty. This led us to our research question: “To what extent does musical sophistication influence the perception of beauty?” 
+### plot
+...
 
-We first made a selection of 30 songs. Then, 3 experts evaluated the snippets based on various criteria. 15 songs with the most stable evaluation were selected as stimuli. In the online survey,
-the Goldsmiths Musical Sophistication Index (<a href="https://www.gold.ac.uk/media/documents-by-section/departments/psychology/Gold-MSIv10_Documentation.pdf">Müllensiefen et al., 2013</a>) is used to measure musical sophistication. Then, participants are asked to listen to the snippets and decide if the song is beautiful or not. Finally, participants have to choose their 3 favourite genres (the selection is STOMP-based). For further analysis, we are going to use Latent Class analysis.
+### **Research Process**
+Step 1: Stimuli selection
 
-
-
-Row 
--------------------------------------
+- Three musical experts, who have more than 10 years of formal training, were invited to evaluate 30 music snippets based on various criteria. Based on expert analyses, 15 songs with the most stable evaluation were selected as stimuli. 
 
 
-### Structure of our portfolio
-This website consists of three more pages.
-On the “Expert Analysis” page it is described how we selected the songs which were used in our main research. We had a selection of 30 songs analyzed by 3 musical experts with more than 10 years of formal training. The songs were analyzed based on 9 components and the final selection of songs had reliable expert ratings and covered most of the range of the 9 components.
-On the “Main research” page our research question is answered by analyzing the results from our Qualtrics survey. The data was analyzed by using Latent Class Analysis (LCA). The LCA divides the participants in groups based on the answers they gave. It was then analyzed if the LCA groups corresponded with a certain level of musical sophistication (measured with the Gold Smith MSI in the survey). It was also investigated if the genre preference of a participant correlated with their LCA group or musical sophistication, since genre preference was believed to be a cofounder.
-The song selection can be heard on the “Song Snippets” page
+Step 2: Suevey design
+
+- In the online survey, the Goldsmiths Musical Sophistication Index (<a href="https://www.gold.ac.uk/media/documents-by-section/departments/psychology/Gold-MSIv10_Documentation.pdf">Müllensiefen et al., 2013</a>) is used to measure musical sophistication.
+- Then, participants are asked to listen to the snippets and decide if the song is beautiful or not. Finally, participants have to choose their 3 favourite genres (the selection is STOMP-based).
 
 
+Step 3: Latent Class Analysis (LCA)
 
+- The LCA divides the participants in groups based on the answers they gave. It was then analyzed if the LCA groups corresponded with a certain level of musical sophistication (measured with the Gold Smith MSI in the survey).
+- It was also investigated if the genre preference of a participant correlated with their LCA group or musical sophistication, since genre preference was believed to be a cofounder.
 
-
-
-### Contact information and Names
-Hello, and welcome to our portfolio.
-We are students from the honours course The Data Science of Everyday Music Listening coordinated by dr. J.A. Burgoyne, and we wanted to know more about the beauty of music. In our brainstorm sessions we concluded that the experience of musical beauty differs from person to person. We wanted to know if someone’s musical sophistication influenced what songs they deemed beautiful. 
-In this portfolio you will find the method and results of our research and we hope you will enjoy it.
-Sincerely,
-Willem Pleiter, Kristina Savickaja, Xiaoqing Li, Denise Quek, Nikita van ‘t Rood and Esther Liefting.
-
-For further information, please contact us at estherliefting@student.uva.nl
 
 
 
@@ -334,6 +355,19 @@ USA III Rail <br>
 
 
 
+Contact us
+==================================
 
+Row
+--------------------------------
+
+### Contact information and Names
+Hello, and welcome to our portfolio.
+We are students from the honours course The Data Science of Everyday Music Listening coordinated by dr. J.A. Burgoyne, and we wanted to know more about the beauty of music. In our brainstorm sessions we concluded that the experience of musical beauty differs from person to person. We wanted to know if someone’s musical sophistication influenced what songs they deemed beautiful. 
+In this portfolio you will find the method and results of our research and we hope you will enjoy it.
+Sincerely,
+Willem Pleiter, Kristina Savickaja, Xiaoqing Li, Denise Quek, Nikita van ‘t Rood and Esther Liefting.
+
+For further information, please contact us at estherliefting@student.uva.nl
 
 
