@@ -29,9 +29,9 @@ source('spotify.R')
 Intro
 ====================================
 
-Inputs {.sidebar}
+Inputs {.sidebar data-width=420}
 -------------------------------------
-### **Assessing the beauty of music**
+### **Assessing the beauty of music**  {.no-padding}
   Music is valued by people for many various reasons, be it the emotion it generates, the memories it triggers, or the beauty it transcends. Nevertheless, this perception of aesthetics is highly subjective. There is no specific reason or explanation to why one would prefer jazz over pop music. However, this realisation has not stopped scholars and academics from generating theories that objectify aesthetics. 
   
   The modernist view of music aesthetics (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096663/">Huang et al., 2016</a>) supports the idea of genre hierarchy. This theory states that complex music, such as jazz, is less popularly valued because of its high intellectual demand. Followers of the theory would explain the above-mentioned example by arguing that jazz is a genre that can be comprehended and appreciated only by musically sophisticated individuals.
@@ -41,22 +41,22 @@ Inputs {.sidebar}
 
 Column
 -------------------------------------
-### Selected songs
+### Selected songs  {.no-padding}
 ```{r}
 valueBox (15, icon ="ion-music-note", color = "primary")
 ```
 
-### Expert analyses
+### Expert analyses  {.no-padding}
 ```{r}
 valueBox (3, icon ="ion-ios-people", color = "info")
 ```
 
-### Different regions
+### Different regions  {.no-padding}
 ```{r}
 valueBox (26, icon ="ion-location", color = "success")
 ```
 
-### LCA classes
+### LCA classes  {.no-padding}
 ```{r}
 valueBox (3, icon ="ion-levels",color = "#00ace6")
 ```
@@ -66,7 +66,7 @@ column {.tabset}
 
 ### Average expert rating per song
 
-```{r  fig.height=7}
+```{r  fig.height=6}
 
 #getting features for all songs
 Features30 <- read.csv2("Features30.csv")
