@@ -58,34 +58,81 @@ valueBox (26, icon ="ion-location", color = "success")
 
 ### LCA classes
 ```{r}
-valueBox (3, icon ="ion-levels",color = "#008080")
+valueBox (3, icon ="ion-levels",color = "#00ace6")
 ```
 
-
-Column
+column {.tabset}
 -------------------------------------
 
-### plot
-...
+### Average expert rating per song
+
+```{r  fig.height=7}
+
+#getting features for all songs
+Features30 <- read.csv2("Features30.csv")
+Features_wide <- Features30 %>%
+  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
+
+
+#getting features for selection
+Features15 <- read.csv("Features_goed.csv", sep=";")
+
+Features15_wide <- Features15 %>%
+  gather("Tempo", "Articulation", "Mode", "Intensity", "Tonalness", "Pitch", "Melody", "Rhytmic.Clarity", "Rhythmic.Complexity", key = Feature, value = Parameter)
+
+df <- Features15_wide
+
+df$tooltip <- c(paste0("Song = ", df$Song, "\n Feature = ", df$Feature, "\n Parameter = ", df$Parameter))
+
+Features_wide$Cols <- Features_wide$Feature
+
+Features15_wide$Cols <- Features15_wide$Feature
+
+
+tooltip_css <- "background-color:#9ccdff;opacity:0.2;font-size:15px;border-radius:10px;padding:10px;font-family:'Roboto','Helvetica Neue',Helvetica,Arial,sans-serif;color: #040404"
+
+Box_jitter <- ggplot(Features_wide, aes(x = Feature, y = Parameter, col = Cols, label = Song)) +
+  geom_boxplot(show.legend = FALSE, alpha = 0.4, outlier.shape = NA) +
+    theme(text = element_text(),
+        axis.text.x = element_text(size=7, angle = 45, hjust = 1)) +
+    geom_jitter_interactive(data = Features15_wide, width = 0.25, alpha = 0.7, aes(colour = Cols, tooltip= df$tooltip, data_id = Song), show.legend = FALSE) +
+    theme(axis.text.x = element_text(size=7, angle = 45, hjust = 1)) +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(0,10, by = 1)) +
+  scale_x_discrete(labels = labs)  +
+  theme(legend.position='none')
+
+
+ggiraph(ggobj = Box_jitter, hover_css = "stroke:darkgrey;r:3pt;fill-opacity:1", tooltip_extra_css = tooltip_css)
+
+
+#ggplotly(p = Box_jitter, width = NULL, height = NULL, tooltip = c("Song", "Parameter", "Feature"), dynamicTicks = FALSE, layerData = 1, originalData = TRUE, source = "A")
+
+
+
+```
 
 ### **Research Process**
+
+
 Step 1: Stimuli selection
 
 - Three musical experts, who have more than 10 years of formal training, were invited to evaluate 30 music snippets based on various criteria. Based on expert analyses, 15 songs with the most stable evaluation were selected as stimuli. 
 
 
+
 Step 2: Suevey design
 
 - In the online survey, the Goldsmiths Musical Sophistication Index (<a href="https://www.gold.ac.uk/media/documents-by-section/departments/psychology/Gold-MSIv10_Documentation.pdf">Müllensiefen et al., 2013</a>) is used to measure musical sophistication.
+
 - Then, participants are asked to listen to the snippets and decide if the song is beautiful or not. Finally, participants have to choose their 3 favourite genres (the selection is STOMP-based).
+
 
 
 Step 3: Latent Class Analysis (LCA)
 
 - The LCA divides the participants in groups based on the answers they gave. It was then analyzed if the LCA groups corresponded with a certain level of musical sophistication (measured with the Gold Smith MSI in the survey).
+
 - It was also investigated if the genre preference of a participant correlated with their LCA group or musical sophistication, since genre preference was believed to be a cofounder.
-
-
 
 
 Main research
