@@ -29,7 +29,6 @@ source('spotify.R')
 Intro
 ====================================
 
-
 Inputs {.sidebar}
 -------------------------------------
 ### **Assessing the beauty of music**
