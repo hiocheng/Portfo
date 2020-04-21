@@ -19,6 +19,7 @@ library(ggplot2)
 library(compmus)
 library(viridis)
 library(DT)
+library(ggiraph)
 library(flexdashboard)
 library (DiagrammeR)
 source('spotify.R')
@@ -27,6 +28,7 @@ source('spotify.R')
 
 Intro
 ====================================
+
 
 Inputs {.sidebar}
 -------------------------------------
