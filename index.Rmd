@@ -29,7 +29,7 @@ source('spotify.R')
 Intro
 ====================================
 
-Inputs {.sidebar data-width=420}
+Topic {.sidebar data-width=420}
 -------------------------------------
 ### **Assessing the beauty of music**  {.no-padding}
   Music is valued by people for many various reasons, be it the emotion it generates, the memories it triggers, or the beauty it transcends. Nevertheless, this perception of aesthetics is highly subjective. There is no specific reason or explanation to why one would prefer jazz over pop music. However, this realisation has not stopped scholars and academics from generating theories that objectify aesthetics. 
@@ -48,17 +48,17 @@ valueBox (15, icon ="ion-music-note", color = "primary")
 
 ### Expert analyses  {.no-padding}
 ```{r}
-valueBox (3, icon ="ion-ios-people", color = "info")
+valueBox (3, icon ="ion-ios-people", color = "success")
 ```
 
 ### Different regions  {.no-padding}
 ```{r}
-valueBox (26, icon ="ion-location", color = "success")
+valueBox (26, icon ="ion-location", color = "info")
 ```
 
 ### LCA classes  {.no-padding}
 ```{r}
-valueBox (3, icon ="ion-levels",color = "#00ace6")
+valueBox (3, icon ="ion-levels",color = "#2eb8b8")
 ```
 
 column {.tabset}
